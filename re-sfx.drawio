@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-04T11:51:19.484Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="ncck0ZivBV3CyrDCFn9k" version="22.1.16" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2024-01-04T11:52:46.850Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="gD1F4IVs2MSX9Ro05DtV" version="22.1.16" type="github" pages="2">
   <diagram name="Use Case Diagram" id="_FnHyHu40F9vVKdBkXFf">
     <mxGraphModel dx="1928" dy="2612" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
@@ -167,7 +167,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="X-o54jJXnpy0lRvDTPty" name="Acitivity Diagram">
-    <mxGraphModel dx="964" dy="1329" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="1402" dy="1547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -340,17 +340,34 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rcbMxeLNNXhaSHYTBL-8-15" value="[add tags]" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=0;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="rcbMxeLNNXhaSHYTBL-8-12">
+        <mxCell id="rcbMxeLNNXhaSHYTBL-8-15" value="[add tags]" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=0;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rcbMxeLNNXhaSHYTBL-8-12" target="rcbMxeLNNXhaSHYTBL-8-17">
           <mxGeometry x="0.0035" y="-30" width="160" relative="1" as="geometry">
             <mxPoint x="739.79" y="340" as="sourcePoint" />
             <mxPoint x="740" y="360" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rcbMxeLNNXhaSHYTBL-8-16" value="[no tags]" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=0;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="rcbMxeLNNXhaSHYTBL-8-12">
-          <mxGeometry x="-0.0811" y="5" width="160" relative="1" as="geometry">
+        <mxCell id="rcbMxeLNNXhaSHYTBL-8-16" value="[no tags]" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=0;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="rcbMxeLNNXhaSHYTBL-8-12" target="rcbMxeLNNXhaSHYTBL-8-17">
+          <mxGeometry x="-0.4769" y="5" width="160" relative="1" as="geometry">
             <mxPoint x="750" y="330" as="sourcePoint" />
             <mxPoint x="840" y="305" as="targetPoint" />
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="820" y="305" />
+              <mxPoint x="820" y="385" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rcbMxeLNNXhaSHYTBL-8-17" value="Confirm upload" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="670" y="360" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rcbMxeLNNXhaSHYTBL-8-18" value="" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;aspect=fixed;strokeWidth=5;perimeter=ellipsePerimeter;" vertex="1" parent="1">
+          <mxGeometry x="720" y="460" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rcbMxeLNNXhaSHYTBL-8-19" value="" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=0;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="rcbMxeLNNXhaSHYTBL-8-18" source="rcbMxeLNNXhaSHYTBL-8-17">
+          <mxGeometry x="0.25" y="-50" width="160" relative="1" as="geometry">
+            <mxPoint x="740" y="430" as="sourcePoint" />
+            <mxPoint x="870" y="445" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
