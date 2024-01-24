@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const customerSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
       name: {
         type: String,
@@ -20,7 +20,7 @@ const customerSchema = new mongoose.Schema(
       },
       soundCount: {
         type: Number,
-        required: true,
+        required: false,
         default: 0,
       },
       image: {
@@ -35,4 +35,4 @@ const customerSchema = new mongoose.Schema(
     }
   );
   
-  module.exports = mongoose.model("User", customerSchema);
+  module.exports = mongoose.model("User", userSchema);

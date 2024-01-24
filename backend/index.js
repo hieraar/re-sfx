@@ -26,6 +26,9 @@ app.listen(process.env.PORT, () => {
   console.log(`Server is running on port 3000`);
 });
 
+const UserRouter = require("./api/routes/User.js");
+app.use("/user", UserRouter);
+
 
 
 
