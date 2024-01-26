@@ -38,6 +38,10 @@ const soundSchema = new mongoose.Schema(
         default:
           "https://cdn.pixabay.com/photo/2017/11/10/05/34/sound-2935466_1280.png",
       },
+      cloudStorageRef: {
+        type: String,
+        required: true,
+      },
     },
     {
       timestamps: true,

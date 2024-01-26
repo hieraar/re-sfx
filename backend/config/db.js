@@ -8,11 +8,13 @@ const connectionString = `mongodb+srv://${username}:${encodedPassword}@${host}/?
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(connectionString, {
-    });
+    const connection = await mongoose.connect(connectionString);
+
     console.log('Connected to MongoDB');
+    return connection;
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
+    throw error;
   }
 };
 
