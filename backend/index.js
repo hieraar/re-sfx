@@ -27,6 +27,8 @@ app.listen(process.env.PORT, () => {
 });
 
 const UserRouter = require("./api/routes/User.js");
+const verificationRouter = require("./api/routes/tokenVerification.js");
+app.use("/", verificationRouter);
 app.use("/user", UserRouter);
 
 

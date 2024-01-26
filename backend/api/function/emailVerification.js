@@ -5,14 +5,12 @@ dotenv.config({ path: "./.env" });
 async function sendVerificationEmail(email, verificationToken) {
   try {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: 'outlook',
       auth: {
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASSWORD, 
       },
     });
-
-    console.log=process.env.EMAIL_USER;
 
     // Use a placeholder localhost URL with the appropriate port
     const localhostURL = 'http://localhost:3000'; 
