@@ -96,3 +96,126 @@ exports.deleteSound = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error deleting sound', error: error.message });
     }
 };
+
+exports.getSoundById = async (req, res) => {
+    const soundId = req.params.soundId;
+    try {
+        const sounds = await Sounds.findById(soundId);
+        if (!sounds) {
+        return res.status(404).json({ message: "Sound not found" });
+        }
+        res.status(200).json({
+        sounds,
+        message: "Sound data retrieved succesfully",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+exports.getSoundsByOwner = async (req, res) => {
+    try {
+        const ownerId = req.cookies.userId;
+    
+        if (!ownerId) {
+          return res.status(401).json({ message: 'Unauthorized. User not signed in.' });
+        }
+    
+        // Find sounds with the same owner ID
+        const sounds = await Sounds.find({ owner: ownerId });
+    
+        res.json({
+          success: true,
+          data: {
+            sounds,
+          },
+        });
+      } catch (error) {
+        res.status(500).json({ success: false, message: 'Error retrieving sounds', error: error.message });
+      }
+};
+
+exports.downloadSound = async (req, res) => {
+    try {
+        const soundId = req.params.soundId;
+    
+        // Fetch the sound record from the database based on the soundId
+        const sound = await Sounds.findById(soundId);
+    
+        if (!sound) {
+          return res.status(404).json({ message: 'Sound not found' });
+        }
+    
+        const filename = `${sound.title}.mp3`; // Set the filename as the title with a .mp3 extension
+    
+        // Set the headers for triggering a file download
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Content-Type', 'audio/mpeg');
+    
+        // Download the file as a stream
+        const blobClient = containerClient.getBlobClient(sound.cloudStorageRef);
+        const downloadBlockBlobResponse = await blobClient.download();
+        const stream = downloadBlockBlobResponse.readableStreamBody;
+    
+        // Pipe the file stream to the response
+        stream.pipe(res);
+    
+      } catch (error) {
+        res.status(500).json({ success: false, message: 'Error downloading sound', error: error.message });
+      }
+};
+
+exports.playSoundById = async (req, res) => {
+    try {
+        const soundId = req.params.soundId;
+    
+        // Fetch the sound record from the database based on the soundId
+        const sound = await Sounds.findById(soundId);
+    
+        if (!sound) {
+          return res.status(404).json({ message: 'Sound not found' });
+        }
+    
+        // Set the headers for audio playback
+        res.setHeader('Content-Disposition', 'inline');
+        res.setHeader('Content-Type', 'audio/mpeg');
+    
+        // Send the audio file as a stream
+        const blobClient = containerClient.getBlobClient(sound.cloudStorageRef);
+        const downloadBlockBlobResponse = await blobClient.download();
+        const stream = downloadBlockBlobResponse.readableStreamBody;
+    
+        // Pipe the audio stream to the response
+        stream.pipe(res);
+    
+      } catch (error) {
+        res.status(500).json({ success: false, message: 'Error playing sound', error: error.message });
+      }
+};
+
+exports.getAllSounds = async (req, res) => {
+    try {
+        // Fetch all sounds from the database
+        const sounds = await Sounds.find();
+    
+        if (sounds.length === 0) {
+          return res.json({
+            success: true,
+            data: {
+              sounds: [],
+              message: 'No sounds found in the database',
+            },
+          });
+        }
+    
+        res.json({
+          success: true,
+          data: {
+            sounds,
+          },
+        });
+      } catch (error) {
+        res.status(500).json({ success: false, message: 'Error retrieving sounds', error: error.message });
+      }
+};
