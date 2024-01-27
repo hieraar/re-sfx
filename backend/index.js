@@ -55,6 +55,8 @@ app.listen(process.env.PORT, () => {
 const UserRouter = require("./api/routes/User.js");
 const verificationRouter = require("./api/routes/tokenVerification.js");
 const SoundsRouter = require("./api/routes/Sounds.js")
+const FavouritesROuter = require("./api/routes/Favourites.js")
 app.use("/", verificationRouter);
 app.use("/user", UserRouter);
 app.use("/sounds", SoundsRouter);
+app.use("/fav", FavouritesROuter);
