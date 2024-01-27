@@ -59,7 +59,6 @@ exports.userSignUp = async (req, res) => {
   }
 };
 
-
 exports.userSignIn = async (req, res) => {
   const { identifier, password } = req.body; 
   try {
@@ -105,7 +104,6 @@ exports.userSignIn = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
 
 exports.getUserById = async (req, res) => {
   const userId = req.params.id;
