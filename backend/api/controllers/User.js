@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const { sendVerificationEmail } = require("../function/emailVerification");
 dotenv.config({ path: "./.env" });
 
+
 exports.userSignUp = async (req, res) => {
   const { name, username, email, password, soundCount, image } = req.body;
   try {
@@ -84,9 +85,20 @@ exports.userSignIn = async (req, res) => {
       expiresIn: "3h",
     });
 
+
     user.password = undefined;
 
+    // console.log(user._id);
+
+    const id = user._id;
+
+    res.cookie('userId', id, { httpOnly: true });
+
     res.status(200).json({ message: "Sign-in successful", user, token, role: "user" });
+
+    // After successfully signing in
+    
+
 
   } catch (error) {
     console.error(error);
