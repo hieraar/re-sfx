@@ -5,15 +5,17 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const connectDB = require("./config/db.js");
 const multer = require('multer');
+const cors = require('cors');
 const uuid = require('uuid');
 const azureStorage = require('./api/function/azureStorage.js');
 const Sounds = require("./api/models/Sounds.js");
 const { BlobServiceClient } = require('@azure/storage-blob');
 const cookieParser = require('cookie-parser');
 
+app.use(cors());
+
 // Use dotenv to load environment variables
 dotenv.config({ path: "./.env" });
-
 
 
 const storage = multer.memoryStorage();
@@ -23,6 +25,14 @@ const upload = multer({ storage: storage });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 
 
 // Set up static file serving
