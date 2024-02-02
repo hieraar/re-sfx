@@ -10,15 +10,19 @@ const accountUrl = process.env.AZURE_ACCOUNT_URL;
 const { BlobServiceClient } = require('@azure/storage-blob');
 const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
 const containerClient = blobServiceClient.getContainerClient(containerName);
+dotenv.config({ path: "./.env" });
 
 exports.uploadSound = async (req, res) => {
     try {
 
-        const userId = req.cookies.userId;
-    
-        if (!userId) {
-          return res.status(401).json({ message: 'Unauthorized. User not signed in.' });
+        const authorizationHeader = req.headers.authorization;
+        if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+          return res.status(401).json({ message: 'Unauthorized. Missing or invalid token.' });
         }
+    
+        const token = authorizationHeader.split(' ')[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET); // Replace 'your-secret-key' with your actual secret key
+        const userId = decodedToken.userId;
     
         const file = req.file;
         const uniqueId = uuid.v4();
