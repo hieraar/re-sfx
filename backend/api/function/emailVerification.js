@@ -13,7 +13,7 @@ async function sendVerificationEmail(email, verificationToken) {
     });
 
     // Use a placeholder localhost URL with the appropriate port
-    const localhostURL = 'http://localhost:3000'; 
+    const localhostURL = 'https://re-sfx-api.vercel.app'; 
 
     const mailOptions = {
       from: process.env.EMAIL_USER,

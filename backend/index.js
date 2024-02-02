@@ -34,7 +34,6 @@ app.use((req, res, next) => {
 });
 
 
-
 // Set up static file serving
 app.use(express.static("public"));
 
