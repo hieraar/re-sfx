@@ -10,6 +10,7 @@ const accountUrl = process.env.AZURE_ACCOUNT_URL;
 const { BlobServiceClient } = require('@azure/storage-blob');
 const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
 const containerClient = blobServiceClient.getContainerClient(containerName);
+const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 
 exports.uploadSound = async (req, res) => {
