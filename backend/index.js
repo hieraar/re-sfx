@@ -52,6 +52,7 @@ app.use(cookieParser());
 app.use((req, res, next) => {
   // Check for the presence of the 'token' cookie
   const token = req.cookies.token;
+  console.log('Token from cookies:', req.cookies.token);
 
   if (token) {
     try {
@@ -60,6 +61,7 @@ app.use((req, res, next) => {
 
       // Attach the decoded token to the request for further use
       req.user = decodedToken;
+      console.log('Decoded token:', req.user);
 
     } catch (error) {
       // Handle token verification errors, if any
