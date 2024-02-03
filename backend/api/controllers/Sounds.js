@@ -18,6 +18,7 @@ exports.uploadSound = async (req, res) => {
   try {
     // Access the user information from the decoded token
     const userId = req.user ? req.user._id : null;
+    console.log('User ID:', req.user ? req.user._id : 'Not authenticated');
 
     if (!userId) {
       return res.status(401).json({ success: false, message: 'Unauthorized: User not authenticated' });
