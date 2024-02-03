@@ -11,6 +11,7 @@ const azureStorage = require('./api/function/azureStorage.js');
 const Sounds = require("./api/models/Sounds.js");
 const { BlobServiceClient } = require('@azure/storage-blob');
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
