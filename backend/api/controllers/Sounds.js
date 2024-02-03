@@ -12,57 +12,53 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(connectionStrin
 const containerClient = blobServiceClient.getContainerClient(containerName);
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
+const jwt = require('jsonwebtoken');
 
 exports.uploadSound = async (req, res) => {
-    try {
+  try {
+    // Access the user information from the decoded token
+    const userId = req.user ? req.user._id : null;
 
-        const authorizationHeader = req.headers.authorization;
-        if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
-          return res.status(401).json({ message: 'Unauthorized. Missing or invalid token.' });
-        }
-    
-        const token = authorizationHeader.split(' ')[1];
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET); // Replace 'your-secret-key' with your actual secret key
-        const userId = decodedToken.userId;
-    
-        const file = req.file;
-        const uniqueId = uuid.v4();
-        const blobName = `${uniqueId}_${file.originalname}`;
-        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-        const uploadResponse = await blockBlobClient.upload(file.buffer, file.size);
-        const fileUrl = `${accountUrl}/${containerName}/${blobName}`;
-    
-        const owner = userId;
-        const title = req.body.title;
-        const description = req.body.description;
-        const tags = JSON.parse(req.body.tags);
-    
-        
-        // Save the file reference or metadata to your database
-        // Example:
-        const newSound = new Sounds({
-          owner: owner,
-          title: title,
-          desc: description,
-          tags: tags,
-          link: fileUrl,
-          cloudStorageRef: blobName,
-        });
-    
-        await newSound.save();
-    
-        res.json({
-          success: true,
-          message: 'File uploaded successfully',
-          data: {
-            uploadResponse,
-            fileUrl,
-            fileName: file.originalname
-          },
-        });
-      } catch (error) {
-        res.status(500).json({ success: false, message: 'Error uploading file', error: error.message });
-      }
+    if (!userId) {
+      return res.status(401).json({ success: false, message: 'Unauthorized: User not authenticated' });
+    }
+
+    const file = req.file;
+    const uniqueId = uuid.v4();
+    const blobName = `${uniqueId}_${file.originalname}`;
+    // Assuming containerClient is defined somewhere in your code
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    const uploadResponse = await blockBlobClient.upload(file.buffer, file.size);
+    const fileUrl = `${accountUrl}/${containerName}/${blobName}`;
+
+    const title = req.body.title;
+    const description = req.body.description;
+    const tags = JSON.parse(req.body.tags);
+
+    // Save the file reference or metadata to your database
+    const newSound = new Sounds({
+      owner: userId, // Use the authenticated user's ID
+      title: title,
+      desc: description,
+      tags: tags,
+      link: fileUrl,
+      cloudStorageRef: blobName,
+    });
+
+    await newSound.save();
+
+    res.json({
+      success: true,
+      message: 'File uploaded successfully',
+      data: {
+        uploadResponse,
+        fileUrl,
+        fileName: file.originalname
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error uploading file', error: error.message });
+  }
 };
 
 exports.deleteSound = async (req, res) => {
