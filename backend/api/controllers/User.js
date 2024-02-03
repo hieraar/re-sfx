@@ -80,24 +80,23 @@ exports.userSignIn = async (req, res) => {
       return res.status(401).json({ message: "Invalid password, please try again" });
     }
 
+    // Create a JWT token with user _id as a claim
     const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET, {
       expiresIn: "3h",
     });
 
+    // Set the token in a cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 3 * 60 * 60 * 1000, // 3 hours in milliseconds
+      sameSite: 'Strict', // Adjust as needed based on your security requirements
+    });
 
+    // Exclude password from the response
     user.password = undefined;
 
-    // console.log(user._id);
-
-    const id = user._id;
-
-    res.cookie('userId', id, { httpOnly: true });
-
-    res.status(200).json({ message: "Sign-in successful", user, token, role: "user" });
-
-    // After successfully signing in
-    
-
+    // Send response with token and user information
+    res.status(200).json({ message: "Sign-in successful", user, role: "user" });
 
   } catch (error) {
     console.error(error);

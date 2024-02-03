@@ -39,15 +39,36 @@ app.use((req, res, next) => {
 app.use(express.static("public"));
 
 // Set up session middleware
-app.use(
-  session({
-    secret: process.env.JWT_SECRET, // Replace with a secure secret key
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.JWT_SECRET, // Replace with a secure secret key
+//     resave: false,
+//     saveUninitialized: true,
+//   })
+// );
 
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+  // Check for the presence of the 'token' cookie
+  const token = req.cookies.token;
+
+  if (token) {
+    try {
+      // Verify and decode the token
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+      // Attach the decoded token to the request for further use
+      req.user = decodedToken;
+
+    } catch (error) {
+      // Handle token verification errors, if any
+      console.error('JWT verification error:', error.message);
+    }
+  }
+
+  next();
+});
 
 app.get('/', (req, res) => {
   res.send('Hello, Express!');
