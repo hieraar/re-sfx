@@ -13,12 +13,12 @@ const { authenticateToken } = require('..//middleware/authToken');
 const storage = multer.memoryStorage(); 
 const upload = multer({ storage: storage });
 
-router.post('/upload', upload.single('file'), uploadSound, authenticateToken);
-router.delete('/delete/:soundId', deleteSound);
-router.get('/getonesound/:soundId', getSoundById);
-router.get('/getsounds', getSoundsByOwner);
-router.get('/download/:soundId', downloadSound);
-router.get('/play/:soundId', playSoundById);
-router.get('/getallsound', getAllSounds);
+router.post('/upload', [authenticateToken], upload.single('file'), uploadSound);
+router.delete('/delete/:soundId',[authenticateToken], deleteSound);
+router.get('/getonesound/:soundId', [authenticateToken],getSoundById);
+router.get('/getsounds',[authenticateToken], getSoundsByOwner);
+router.get('/download/:soundId',[authenticateToken], downloadSound);
+router.get('/play/:soundId',[authenticateToken], playSoundById);
+router.get('/getallsound',[authenticateToken], getAllSounds);
 
 module.exports = router;
