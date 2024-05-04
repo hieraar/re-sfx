@@ -11,7 +11,7 @@ const authenticateToken = (req, res, next) => {
     if (err) {
       console.log(err)
       return res.status(401).send({
-        message: 'Unauthorized!',
+        message: err.message,
       })
     }
     req.userId = decoded._id

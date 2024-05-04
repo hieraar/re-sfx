@@ -13,27 +13,29 @@ const { BlobServiceClient } = require('@azure/storage-blob');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
-
-
 // Use dotenv to load environment variables
 dotenv.config({ path: "./.env" });
 
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 // Set up middleware for parsing request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
+const allowedOrigins = ['http://localhost:3000', 'https://fe-re-sfx.vercel.app'];
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+const corsOptions = {
+  credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
+
 
 
 // Set up static file serving
