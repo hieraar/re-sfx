@@ -13,16 +13,13 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const jwt = require('jsonwebtoken');
+const {getUserIDByAuth} = require('../function/getUserIDByAuth')
 
 exports.uploadSound = async (req, res) => {
   try {
     // Access the user information from the decoded token
-    const userId = req.user ? req.user._id : null;
-    console.log('User ID:', req.user ? req.user._id : 'Not authenticated');
-
-    if (!userId) {
-      return res.status(401).json({ success: false, message: 'Unauthorized: User not authenticated' });
-    }
+    const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
+    console.log('User ID:', userId ? userId : 'Not authenticated');
 
     const file = req.file;
     const uniqueId = uuid.v4();
@@ -31,17 +28,19 @@ exports.uploadSound = async (req, res) => {
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     const uploadResponse = await blockBlobClient.upload(file.buffer, file.size);
     const fileUrl = `${accountUrl}/${containerName}/${blobName}`;
-
+    console.log(req.body.tags)
     const title = req.body.title;
     const description = req.body.description;
     const tags = JSON.parse(req.body.tags);
+
+    console.log({title, description, tags})
 
     // Save the file reference or metadata to your database
     const newSound = new Sounds({
       owner: userId, // Use the authenticated user's ID
       title: title,
       desc: description,
-      tags: tags,
+      tags: tags.map(tagName => ({ item: tagName })),
       link: fileUrl,
       cloudStorageRef: blobName,
     });
@@ -64,7 +63,7 @@ exports.uploadSound = async (req, res) => {
 
 exports.deleteSound = async (req, res) => {
     try {
-        const userId = req.cookies.userId;
+        const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
         const soundId = req.params.soundId; // Assuming you pass the soundId as a route parameter
 
         if (!userId) {
@@ -118,7 +117,7 @@ exports.getSoundById = async (req, res) => {
 
 exports.getSoundsByOwner = async (req, res) => {
     try {
-        const ownerId = req.cookies.userId;
+        const ownerId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
     
         if (!ownerId) {
           return res.status(401).json({ message: 'Unauthorized. User not signed in.' });

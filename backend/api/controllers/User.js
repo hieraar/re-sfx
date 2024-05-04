@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const { sendVerificationEmail } = require("../function/emailVerification");
 dotenv.config({ path: "./.env" });
-
+const {getUserIDByAuth} = require('../function/getUserIDByAuth')
 
 exports.userSignUp = async (req, res) => {
   const { name, username, email, password, soundCount, image } = req.body;
@@ -94,6 +94,7 @@ exports.userSignIn = async (req, res) => {
 
     // Exclude password from the response
     user.password = undefined;
+    user.verificationToken = token
 
     // Send response with token and user information
     res.status(200).json({ message: "Sign-in successful", user, role: "user" });
@@ -105,7 +106,7 @@ exports.userSignIn = async (req, res) => {
 };
 
 exports.getUserById = async (req, res) => {
-  const userId = req.params.id;
+  const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
   try {
     const user = await User.findById(userId);
     if (!user) {
@@ -116,7 +117,6 @@ exports.getUserById = async (req, res) => {
       username: user.username,
       email: user.email,
       soundCount: user.soundCount,
-      message: "Customer data retrieved succesfully",
     });
   } catch (error) {
     console.error(error);
@@ -124,8 +124,9 @@ exports.getUserById = async (req, res) => {
   }
 };
 
+// bug wrong logic
 exports.updateUserData = async (req, res) =>{
-  const userId = req.params.id;
+  const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
   const { newName, newUserName, newEmail} = req.body; 
   try {
     const user = await User.findById(userId);

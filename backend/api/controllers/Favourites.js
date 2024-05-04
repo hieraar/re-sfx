@@ -1,10 +1,11 @@
 const Favourite = require("../models/Favourites");
 const Sounds = require("../models/Sounds");
 const User = require("../models/User");
+const {getUserIDByAuth} = require('../function/getUserIDByAuth')
 
 exports.addToFav = async (req, res) => {
     try {
-        const userId = req.cookies.userId;
+        const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
         const soundId = req.params.soundId;
     
         // Check if the user and sound exist
@@ -43,7 +44,7 @@ exports.addToFav = async (req, res) => {
 
 exports.removeSoundbyId = async (req, res) => {
   try {
-    const userId = req.cookies.userId;
+    const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
     const soundId = req.params.soundId;
 
     // Check if the user exists
@@ -78,7 +79,7 @@ exports.removeSoundbyId = async (req, res) => {
 
 exports.getFavbyOwnerId = async (req, res) => {
   try {
-    const userId = req.cookies.userId;
+    const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
 
     // Check if the user exists
     const user = await User.findById(userId);
@@ -139,7 +140,7 @@ exports.removeFavbyId = async (req, res) => {
 
 exports.checkFav = async (req, res) => {
   try {
-    const userId = req.cookies.userId;
+    const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
     const soundId = req.params.soundId;
 
     // Check if the user's favorite list contains the specified sound
