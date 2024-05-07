@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-07T01:17:45.931Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="bN0UXT2FSgkMjpyLsZ78" version="24.3.1" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2024-05-07T01:20:54.500Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="f3Nviif1spF8qtWdT8UF" version="24.3.1" type="github" pages="6">
   <diagram name="Use Case Diagram" id="_FnHyHu40F9vVKdBkXFf">
     <mxGraphModel dx="1354" dy="2254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
@@ -1472,7 +1472,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="g558aYMoHkc0UPpv86Y4" name="Struktur Perusahaan">
-    <mxGraphModel dx="345" dy="374" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1354" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1529,6 +1529,15 @@
         </mxCell>
         <mxCell id="un9URRFKdJgISPEFvjLz-18" value="Ilia &quot;Something&quot; Petrov&lt;div&gt;&lt;b&gt;&lt;i&gt;PLAYER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="350" y="730" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-19" value="Rio &quot;Rio Djaja&quot; Djaja&lt;div&gt;&lt;b&gt;&lt;i&gt;CONTENT CREATOR&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="810" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-20" value="Spicy &quot;Spicyuuuu&quot; Yuuu&lt;div&gt;&lt;b&gt;&lt;i&gt;CONTENT CREATOR&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="890" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-21" value="Alysha &quot;Alysha&quot; Aziz&lt;div&gt;&lt;b&gt;&lt;i&gt;SOCIAL MEDIA MANAGER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="970" width="220" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
