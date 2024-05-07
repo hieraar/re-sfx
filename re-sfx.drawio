@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-07T01:10:04.490Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="0-tbHn5euYFqXZPdgI7Z" version="24.3.1" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2024-05-07T01:17:45.931Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="bN0UXT2FSgkMjpyLsZ78" version="24.3.1" type="github" pages="6">
   <diagram name="Use Case Diagram" id="_FnHyHu40F9vVKdBkXFf">
     <mxGraphModel dx="1354" dy="2254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
@@ -1472,7 +1472,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="g558aYMoHkc0UPpv86Y4" name="Struktur Perusahaan">
-    <mxGraphModel dx="394" dy="428" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="345" dy="374" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1500,11 +1500,35 @@
         <mxCell id="un9URRFKdJgISPEFvjLz-8" value="Jason &quot;BebelaK&quot; Lim&lt;div&gt;&lt;b&gt;&lt;i&gt;PART-TIME VIDEO EDITOR&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="110" y="730" width="220" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="un9URRFKdJgISPEFvjLz-9" value="Hiera &quot;Salmonized&quot; Rhesadewa&lt;div&gt;&lt;b&gt;&lt;i&gt;PART-TIME VIDEO EDITOR&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="un9URRFKdJgISPEFvjLz-9" value="Hiera &quot;Salmonized&quot; Rhesadewa&lt;div&gt;&lt;b&gt;&lt;i&gt;PART-TIME VIDEO EDITOR &amp;amp; ENGINEERING TEAM&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="110" y="810" width="220" height="60" as="geometry" />
         </mxCell>
         <mxCell id="un9URRFKdJgISPEFvjLz-10" value="Juandi &quot;Juandi&quot;&lt;div&gt;&lt;b&gt;&lt;i&gt;EDITOR&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="110" y="890" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-11" value="Joshua &quot;JdFaker&quot; Fok&lt;div&gt;&lt;b&gt;&lt;i&gt;TEAM MANAGER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="130" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-12" value="Alexandre &quot;alecks&quot; Salle&lt;div&gt;&lt;b&gt;&lt;i&gt;HEAD COACH&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="220" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-13" value="Khalish &quot;d4v41&quot; Rusyaidee&lt;div&gt;&lt;b&gt;&lt;i&gt;PLAYER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="310" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-14" value="Aaron &quot;mindfreak&quot; Leonhart&lt;div&gt;&lt;b&gt;&lt;i&gt;PLAYER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="390" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-15" value="Jason &quot;f0rsakeN&quot; Susanto&lt;div&gt;&lt;b&gt;&lt;i&gt;PLAYER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="480" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-16" value="Wang &quot;Jinggg&quot; Jing Jie&lt;div&gt;&lt;b&gt;&lt;i&gt;PLAYER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="570" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-17" value="Cahya &quot;Monyet&quot; Nugraha&lt;div&gt;&lt;b&gt;&lt;i&gt;PLAYER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="650" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="un9URRFKdJgISPEFvjLz-18" value="Ilia &quot;Something&quot; Petrov&lt;div&gt;&lt;b&gt;&lt;i&gt;PLAYER&lt;/i&gt;&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="730" width="220" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
