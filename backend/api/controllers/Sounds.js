@@ -13,6 +13,7 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const jwt = require('jsonwebtoken');
+
 const {getUserIDByAuth} = require('../function/getUserIDByAuth')
 
 exports.uploadSound = async (req, res) => {
@@ -21,19 +22,33 @@ exports.uploadSound = async (req, res) => {
     const userId = getUserIDByAuth(req?.headers?.['authorization']?.split(' ')?.[1]);
     console.log('User ID:', userId ? userId : 'Not authenticated');
 
-    const file = req.file;
-    const uniqueId = uuid.v4();
-    const blobName = `${uniqueId}_${file.originalname}`;
-    // Assuming containerClient is defined somewhere in your code
-    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    const uploadResponse = await blockBlobClient.upload(file.buffer, file.size);
-    const fileUrl = `${accountUrl}/${containerName}/${blobName}`;
-    console.log(req.body.tags)
-    const title = req.body.title;
-    const description = req.body.description;
-    const tags = JSON.parse(req.body.tags);
+    const files = req.files;
+    const image = files.image[0]
+    const sound = files.sound[0]
+    console.log(sound.originalname)
 
-    console.log({title, description, tags})
+    // Sound Upload
+    const uniqueId = uuid.v4();
+    const blobName = `${uniqueId}_${sound.originalname}`;
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    const uploadResponse = await blockBlobClient.upload(sound.buffer, sound.size);
+    const fileUrl = `${accountUrl}/${containerName}/${blobName}`;
+
+    console.log('Sound Upload Success')
+    // image upload
+    const uniqueIdImage = uuid.v4();
+    const blobNameImage = `${uniqueIdImage}_${image.originalname}`;
+    const blockBlobClientImage = containerClient.getBlockBlobClient(blobNameImage);
+    const uploadResponseImage = await blockBlobClientImage.upload(image.buffer, image.size);
+    const fileImageUrl = `${accountUrl}/${containerName}/${blobNameImage}`;
+
+    console.log('Image Upload Success')
+
+
+    // include data
+    const title = req?.body?.title ?? '';
+    const description = req?.body?.description ?? '';
+    const tags = JSON.parse(req?.body?.tags ?? '[]');
 
     // Save the file reference or metadata to your database
     const newSound = new Sounds({
@@ -41,6 +56,7 @@ exports.uploadSound = async (req, res) => {
       title: title,
       desc: description,
       tags: tags.map(tagName => ({ item: tagName })),
+      image: fileImageUrl,
       link: fileUrl,
       cloudStorageRef: blobName,
     });
@@ -53,7 +69,12 @@ exports.uploadSound = async (req, res) => {
       data: {
         uploadResponse,
         fileUrl,
-        fileName: file.originalname
+        fileName: sound.originalname,
+        image: {
+          uploadResponseImage,
+          fileImageUrl, 
+          fileName: image.originalname
+        }
       },
     });
   } catch (error) {
