@@ -30,6 +30,8 @@ const userSchema = new mongoose.Schema(
         "https://cdn.vectorstock.com/i/preview-1x/77/30/default-avatar-profile-icon-grey-photo-placeholder-vector-17317730.jpg",
     },
     verificationToken: String,
+    refreshToken: String,
+
     isVerified: {
       type: Boolean,
       default: false,
