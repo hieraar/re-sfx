@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const { sendVerificationEmail } = require("../function/emailVerification");
 dotenv.config({ path: "./.env" });
 const {getUserIDByAuth} = require('../function/getUserIDByAuth')
+const Refresh = require('../models/refresh')
 
 exports.userSignUp = async (req, res) => {
   const { name, username, email, password, soundCount, image } = req.body;
@@ -80,10 +81,35 @@ exports.userSignIn = async (req, res) => {
       return res.status(401).json({ message: "Invalid password, please try again" });
     }
 
+    
+
     // Create a JWT token with user _id as a claim
-    const token = jwt.sign({ _id: user.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({
+      type: 'access',
+      _id: user.id
+    }, process.env.JWT_SECRET, {
+      algorithm: 'HS256',
+      allowInsecureKeySizes: true,
       expiresIn: "3h",
     });
+
+    
+    const refreshToken = jwt.sign(
+      {
+        type: 'refresh',
+        _id: user._id,
+      },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        algorithm: 'HS256',
+        allowInsecureKeySizes: true,
+        expiresIn: 60 * 60 * 24 * 30,
+      }
+    )
+    const refresh = new Refresh({
+      token: refreshToken,
+    })
+    await refresh.save()
 
     // Set the token in a cookie
     res.cookie('token', token, {
@@ -95,6 +121,7 @@ exports.userSignIn = async (req, res) => {
     // Exclude password from the response
     user.password = undefined;
     user.verificationToken = token
+    user.refreshToken = refreshToken
 
     // Send response with token and user information
     res.status(200).json({ message: "Sign-in successful", user, role: "user" });
@@ -147,4 +174,36 @@ exports.updateUserData = async (req, res) =>{
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
+}
+
+
+exports.refreshAccessToken = async (req, res) => {
+  const token = req?.headers?.['authorization']?.split(' ')?.[1]
+  const refresh = await Refresh.findOne({
+    token: token,
+  })
+  if (!refresh) return res.sendStatus(403)
+  jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      console.log(err)
+      return res.status(401).send({
+        message: 'Unauthorized!',
+      })
+    }
+
+    const accessToken = jwt.sign(
+      {
+        type: 'access',
+        _id: decoded._id,
+      },
+      process.env.JWT_SECRET,
+      {
+        algorithm: 'HS256',
+        allowInsecureKeySizes: true,
+        expiresIn: '3h',
+      }
+    )
+
+    res.json({ accessToken: accessToken })
+  })
 }
